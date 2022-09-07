@@ -1,0 +1,143 @@
+Angular, single page application design framework. Library degil
+React ise bir Js Library
+
+Single page app ne demek, sayfalar arasinda gecis yaparken yada bulundugumuz sayfada bir degisiklik yaptigimizda, sayfa yeniden render edilmez. 
+
+Angular ile gelistirilen uygulama, tamamen js ve html ile de gelisitirlebilir. ancak bu frameworkleri kullanmak bize moduler(yani birden cok yerde kullanilabilir) ve yeniden kullanilabilir bir kod yazmayi saglar. 
+
+Google tarafindan gelistirildi.
+
+1: Bir Js Framework udur.
+2: Tamamen Frontend icindir.
+3: Eger Database den herhangi bir veriye ihtiyac duyarsak, bu durumda bir api servisi kullanmamiz gerekir. Mesela bir banka yada film api si.
+
+
+Angular docs da söyle yazar:
+
+One framework;  Mobile and Desktop
+yani bu framework ile hem mobile hemde desktop uygulamasi gelistirebiliriz. 
+
+Mobile app gelistirebilmek icin NativeScript Framework kullanmak gerekir. 
+NativeScript;    open source framework for building native mobile apps with Angular, Vue js, TypeScript  or Js
+
+Alternatif olarak,  ionicframework ile de mobil app ler gelistirebiliriz. 
+
+electron.js nedir?
+Açık kaynaklı olan bu platformu kendi ifadeleriyle anlatacak olursak “Javascript, HTML ve CSS ile çapraz platform Masaüstü uygulamaları geliştir”. şeklinde bir kullanımı söz konusu. Peki nedir bu cümlenin özü ne anlama geliyor dediğinizi duyar gibiyim ya da ben kendim böyle bir soru sormuş olayım. Cevabını ise hepimizin kullandığı bir web uygulamasını Linux,Windows,MacOS yani tüm platformlara sunabiliriz. Javascript tabanlı bir yapı olduğunu belirtmiştik. Tabii ki bunun yanında React,Angular,JQuery,Vue gibi kütüphaneleri de kullanabilir ve geliştirme yapılabilir.
+
+
+
+
+-------------------------------------------
+
+
+Angular ile tamamen user in tarayicisinda calismak üzere bir app tasarlanir.
+
+Ve sadece bir tane html sayfasi calisir. 
+index.html dosyasi
+ve bu html dosyasina baglanan Js dosyalarindan olusur.
+
+
+Angular, tamamen dynamic tir. 
+yani bir e commerce sitesi gelistirecegiz. ve backend den verilere ihtiyacimiz var.
+Iste bu durumda django, node.js, asp.net yada baska bir dil ile gelistirilmis   bir backend den rest api vasitasi ile veri alip calisabilir. 
+
+
+angular ile gelistirilmis masaüstü uygulamasi, user lara sanki mobil app kullaniyormus havasi verir. cünkü server dan yeni veriye ihtiyac oldugunda yeniden render olmaz. ve sayfa gecisleri cok hizli 
+
+
+
+material angular sayfasinda, hazir component ler saglanir bizim icin. 
+
+
+Type script nedir?
+
+
+Angular kullanmak icin node.js kurulumu yapmak gerekir. cünkü npm script leri kullanacagiz. npm de;  node.js ile gelir. 
+
+
+Kullanim icin;
+ya cmd yada powershell kullanilir. yada vs code icindeki terminaller
+
+node -v    (versiyon kontrol)
+
+npm -v
+
+
+
+Angular Project Kurulum:
+
+1: docs da get started altinda setup.
+    Bu kod, angular scriptlerinin global olarak pc mize yüklenmesini saglar. 
+    npm install -g @angular/cli
+    (paketi güncellemek istedigimizde, install yerine uninstall yazariz. silindikten sonra sifirdan yükleriz.)
+    (npm install -g @angular/cli@12.1.3  komutu ile de istedigimiz spesific bir versiyonu yükleriz.)
+
+2: browser da npm global list yazarsak;
+    npm list -g --depth 0      bu kodu medium yazisindan aliriz.
+
+    Bu kod bize pc mizde global de hangi paketlerin yüklü oldugunu gösterir. depth 0 dersek derinlik 0 olmus olur ve kolay bir görüntü saglar.
+
+### ng --help komutu ile calistirabilecegimiz kodlari görürüz. ng new;  ng ile calisacak kodlardan bir tanesidir.
+
+3: Create a workspace and initial application:
+    ng new todoapp
+(Bu kodu yazdigimizda, router sorusu ve css sorusu cikar. css sorusuna cevap vermek icin ok tuslari kullanilir.)
+
+
+4: Projemiz todoapp klasörü icinde olustu. istersek cd komutu ile todoapp icine giris yapariz. yada todoapp klaösrünü tutup bos bir yere sürükleyebiliriz. Böylece vs code artik todoapp klasörü icinde calisir. 
+
+
+5: ng serve dersek; tüm klasörler birlestirilerek proje calistirilir ancak dha sonrasinda biz projeyi kendimiz acariz. 
+    Bunun yerine;
+    ng serve -o   yada 
+    ng serve --open    dersek,  kendisi hem projeyi baslatir hem de acar. 
+
+    ## Bu kodlar ile bizim icin browser application bundles  olusturulur
+    ## localhost 4200
+
+
+
+## app icindeki app.component.html icerigi silindiginde tarayici temiz ekran olur. 
+
+### component yada dosya ekleyecegimiz zaman proje durdurulur
+
+# proje dosyalarimizin hepsi src icinde yer alir. diger tüm dosyalar projenin ayarlari ile ilgili. 
+
+## app icinde bulunan html css ve iki adet ts dosyalari, app component ini olusturur.
+## index.html icindeki <app-root></app-root>  bizim app component imizdir. 
+bunun icerigi silinince hersey gider. 
+
+
+## app klasörüne baktigimizda, 4 tane dosya ve birde modül görürüz. 
+Biz bir app gelistirirken tüm kodlarimizi index.htm icerisine yazmayiz. cünkü kodlarimizin baska yerlerde de kullanilmasini isteriz. Bunun icin kodlarimizi tek bir parca halinde tutmak yerine, kücük kücük parcalara yani component lara böleriz. yani navbar imizi footer imiz bir component dir. 
+
+## modül ise; component lari kapsayan seydir. bir app icindeki tüm component larimizi kapsar. ayrica angular tarafindan bize default olarak saglanmis ve bizim component lerimiz ile birlikte kullanilacak diger component lardan da faydalanmak icin ve bunlari en etkili sekilde kullanmak icin, tüm component lar 
+bir modül icinde yer alir. 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
