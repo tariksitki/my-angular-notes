@@ -94,7 +94,7 @@ Angular Project Kurulum:
     ng serve --open    dersek,  kendisi hem projeyi baslatir hem de acar. 
 
     ## Bu kodlar ile bizim icin browser application bundles  olusturulur
-    ## localhost 4200
+    ## localhost 4200  
 
 
 
