@@ -102,7 +102,7 @@ Angular Project Kurulum:
 
 ### component yada dosya ekleyecegimiz zaman proje durdurulur
 
-# proje dosyalarimizin hepsi src icinde yer alir. diger tüm dosyalar projenin ayarlari ile ilgili. 
+# proje dosyalarimizin hepsi src icinde yer alir. diger tüm dosyalar projenin ayarlari ile ilgili.
 
 ## app icinde bulunan html css ve iki adet ts dosyalari, app component ini olusturur.
 ## index.html icindeki <app-root></app-root>  bizim app component imizdir. 
@@ -170,11 +170,112 @@ seklinde cagirmamiz gerekir.
 
 
 
+            ### bootstrap ekleme:
+
+cdn kodu index.html icine yapistirilir. 
+sonrasinda direkt olarak html kodlarinda class yazilarak kullanilir. 
+
+## bootstrap download:
+npm install bootstrap@5.0.2
+
+## Bu kod dan sonra package.json icinde yer alir ve library de node modules e yerlesir.
+
+## css dosyasinda kullanim: (bunu yapmazsak calismaz)
+@import "~bootstrap/dist/css/bootstrap.css"
+## bu yolun aynisini node modules de takip edebilirsin
+
+#### Önemli:
+
+## bootstrap import u app component icindeki css de de yapilabilir. yada tüm proje icin kullanmak istersek o zaman ana dizindeki css de kullanilir. 
+
+## Cok Önemli:
+## bootstrap in icindeki js leri kullanmak icin cdn kodunu normal yapistiririz ama bootstrap i download ettigimizde nasil kullaniriz?
+
+## Bunun icin; 
+angular.json dosyasi icinde architect kisminda söyle bir kod var:
+
+        "styles": [
+              "src/styles.css"
+            ],
+            "scripts": []
+
+Buradaki kod da styles.css zaten default olarak var oldugundan bootstarp in css kodlarini eklemek icin icin ekstra birsey yapmiyoruz. yani css dosyasina import islemi yaptigimizda css kodlari direkt olarak calisir.
+Ancak js kodlari kismi yani scripts kismi bostur. 
+Bunun icin bu kod su sekilde yazilir. 
+    "styles": [
+              "src/styles.css"
+            ],
+            "scripts": [
+                "node_modules/bootstrap/dist/js/bootstrap.min.js"
+            ]
+
+## Yukarida yazdigimiz gibi css kismi icin ekstra birsey yapmamiza gerek yok. ancak yine de yapmak istersek kodun tamami su sekilde olmali.
+
+    "styles": [
+              "src/styles.css",
+              "node_modules/bootstrap/dist/css/bootstrap.min.css"
+            ],
+            "scripts": [
+                "node_modules/bootstrap/dist/js/bootstrap.min.js"
+            ]
+
+
+
+
+## Not:  Bir component icindeki html ve css dosyalarini silerek, tüm islemler app.component.ts dosyasi icinde yapilabilir. css in component icinde yazimina örnek dosyada var. 
 
 
 
 
 
+
+
+            #### New Component:  (Manuel yöntemle)
+### Önemli:  app klasörü bizim modulümüzdür. Biz default olarak bunun icinde app component ine sahibiz. simdi ise ayni module icinde ikinci component imizi olusturucagiz. 
+
+app klasörü icinde; 
+1: todo.component.ts adinda dosya olusturulur. 
+2: todo.component.html adinda dosya olusturulur. 
+3: todo.component.css adinda dosya olusturulur. 
+
+Bu dosyalarin icindeki kodlara bakabilirsin.
+
+## export yazarken class ismi verirken, sonu Component seklinde bitmeli.
+
+4: Bu islemlerden sonra;
+app module icinde yeni component imizi tanimlariz.
+yani app.module.ts dosyasi icinde declare kismina ikinci component olarak tanimlanir. 
+
+5: Su an baslangic component i olarak app calisir. todo yu da calistirmak icin, todo component ine ait selector ile app component ine ait html dosyasi icinde todo da cagirilir. 
+## inspect yapildiginda artik bu component da görülebilir. 
+
+Not: todo da bir component oldugu icin istedigimiz yerde istedigimiz sayida cagirma islemi yapabiliriz.
+
+
+
+
+
+
+            #### New Component with CLI:
+
+## Not: bu sekilde ekleme yaptigimizda; app module icinde yeni bir klasör olusturur ve bu klasör icinde yeni component i olusturur. Ayrica module dosyasi icine yeni component imizi de otomatik larak ekler. 
+yani todo component icinde 4 tane dosya otomatik olusur. Son olarak da update yapar.  UPDATE src/app/app.module.ts (393 bytes)
+
+1: ng g c todo
+(Burada ki g  generate  c  component  todo ise component ismidir.) 
+Dolayisi ile bu kod yerine su kod da calistirilabilir:
+
+    ng generate component todo 
+
+## cli ile component eklemek bu kadar.
+eger istersek simdi eskiden yüklü olan app component i silebiliriz. 
+ve module dosyasi icindeki baslangic component ini de degistirebiliriz.
+
+## Bu degistirildikten sonra; inspect kismina bakarsak, artik app component in yerini app-todo nun aldigini görürüz.
+
+## index.html de cagrilmis olan component da degistirilmeli
+
+## eger app compenent ini silmek istersek, app.module.ts kalmak zorundadir. 
 
 
 
