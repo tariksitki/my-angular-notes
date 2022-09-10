@@ -88,7 +88,7 @@ Angular Project Kurulum:
 4: Projemiz todoapp klasörü icinde olustu. istersek cd komutu ile todoapp icine giris yapariz. yada todoapp klaösrünü tutup bos bir yere sürükleyebiliriz. Böylece vs code artik todoapp klasörü icinde calisir. 
 
 
-5: ng serve dersek; tüm klasörler birlestirilerek proje calistirilir ancak dha sonrasinda biz projeyi kendimiz acariz. 
+5: ng serve dersek; tüm klasörler birlestirilerek proje calistirilir ancak daha sonrasinda biz projeyi kendimiz acariz. 
     Bunun yerine;
     ng serve -o   yada 
     ng serve --open    dersek,  kendisi hem projeyi baslatir hem de acar. 
@@ -112,8 +112,71 @@ bunun icerigi silinince hersey gider.
 ## app klasörüne baktigimizda, 4 tane dosya ve birde modül görürüz. 
 Biz bir app gelistirirken tüm kodlarimizi index.htm icerisine yazmayiz. cünkü kodlarimizin baska yerlerde de kullanilmasini isteriz. Bunun icin kodlarimizi tek bir parca halinde tutmak yerine, kücük kücük parcalara yani component lara böleriz. yani navbar imizi footer imiz bir component dir. 
 
-## modül ise; component lari kapsayan seydir. bir app icindeki tüm component larimizi kapsar. ayrica angular tarafindan bize default olarak saglanmis ve bizim component lerimiz ile birlikte kullanilacak diger component lardan da faydalanmak icin ve bunlari en etkili sekilde kullanmak icin, tüm component lar 
-bir modül icinde yer alir. 
+## modül ise; component lari kapsayan seydir. bir app icindeki tüm component larimizi kapsar. ayrica angular tarafindan bize default olarak saglanmis ve bizim component lerimiz ile birlikte kullanilacak diger modüllerden de faydalanmak icin ve bunlari en etkili sekilde kullanmak icin, bir app icindeki tüm component lerimiz  ve angular tarafindan saglanan default modüller bir modül icinde yer alir. 
+Bu kapsayici modül, bizim app imizi olusturur ve app isimle app imizde bu modulün adi AppModule dir.
+
+Tüm bilesenlerimiz appModlü olusturur. appModul de uygulamamizin kendisidir. 
+
+## Angular tarafindan saglanan default modüllere örnek;
+1: NgModule
+2: FormsModule
+3: RoutingModule
+
+## Biz projemizi olustururken, bize soru sorar. routing modul istiyor musunuz diye. eger biz istersek, bu modul projemizin bir parcasi olur. degilse olmaz. eger inputlar ile calisacaksak da o zaman formsmodul ü ekleriz. 
+
+## Genel projemizde ihtiyac oldugunda birden cok modul olusturabiliriz. mesela customerModul, adminModul. Ve projemizin hangi modul ile calismaya baslayacagini istedigimiz zaman degistirebiliriz. 
+
+## bunun ayarlamsini main.ts icinde yapiyoruz. 
+platformBrowserDynamic().bootstrapModule(AppModule)  
+buradaki kod bize appModule ile baslayacagini söyler. 
+
+### app imizin app.module.ts isimli ana bir moduleden olustugunu söylemistik. Bu modül icinde birden cok component olusturabiliriz. bu modül icinde olacak componentleri yazacagimiz yer app.module.ts dosyasidir. 
+## app.component.ts isimli dosyada ise, app.componnet imizin icinde bulunacak alt component leri yazariz. 
+
+## app icerisinde default olarak app.component.spec.ts dosyasi gelir. Bu dosya test asamasinda kullanilir. 
+
+
+## Özet:
+Bir proje icerisinde birden cok modüle olabilir. Bir modul icerisinde de birden cok component olabilir. 
+# Ancak; modüllerden bir tanesini projemizin baslangic modülü olarak secmek durumundayiz.
+
+Bunu nasil yapariz: 
+main.ts icerisinde, modül ile ilgili bir böl+m vardir. Bu bölüme yazariz. 
+
+## Ayni sekilde;  modül icerisindeki component lardan bir tanesini de baslangic component i olarak secmek durumundayiz.
+# Bu nasil yapilir:
+app klasörü icindeki app.module.ts icerisinde;  bu modül icerisinde olustuurmus oldugumuz tüm component lar declare edilir. bootstrap kisminda ise bu component lardan hangisinin baslangic component i olacagi belirtilir. 
+
+# Önemli: ayni anda sadece tek bir component cagirilabilir. Ancak bit tüm component larimizin ayni anda cagirilmasini ve index.html de basilmasini isteriz. Bunun icin tüm component lar o modüle ait ana component da cagirilir. mesela app modülünde bu app component idir. index.html de de sadece app componnet basildiginda tüm component lar gelmis olur.  ayni react gibi. 
+
+## index.html de component cagirmak icin bu component e ait selector kullanilir. 
+## Birde bu component a ait templateUrl: './app.component.html',  kismi mevcuttur. Iste biz selector ile component i cagirdigimizda bu url de bulunan html icerigi return edilir. 
+## bu component e css vermek icinde yine  app.component.css dosyasi kullanilir. 
+
+## inspect yaptigimizda, html icindeki app-root component ini ve bunun iceriklerini görürüz. 
+
+## Önemli:
+component icindeki selector de . yada # kullanilmaz. Bu nedenle index.html de cagirma esnasinda react gibi component seklinde cagirilir.
+## Eger biz . yada # kullanirsak; yani selector: '.app-root', seklinde tanimlama yaparsak bu durumda index.html de cagirma esnasinda <div class="app-root" ></div>
+seklinde cagirmamiz gerekir. 
+
+## component seklinde cagirdigimizda, inspect kisminda app-root isimli component görürüz. id yada class ile cagirdigimizda ise div olarak. 
+
+## selector app-root olmak zorunda degil. isim de degisebilir. 
+
+## Hatalarimizi console da görebiliyoruz. 
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
