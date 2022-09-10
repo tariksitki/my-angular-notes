@@ -118,7 +118,7 @@ Bu kapsayici modül, bizim app imizi olusturur ve app isimle app imizde bu modul
 Tüm bilesenlerimiz appModlü olusturur. appModul de uygulamamizin kendisidir. 
 
 ## Angular tarafindan saglanan default modüllere örnek;
-1: NgModule
+1: NgModule  
 2: FormsModule
 3: RoutingModule
 
