@@ -1,4 +1,64 @@
+<div class="container">
+  <div class="row">
+    <div class="col-5 mx-auto">
+      <!-- <h3 class="bg-primary text-white p-3 text-center">{{ name }}'s TodoList </h3> -->
+      <h3 class="bg-primary text-white p-3 text-center">{{ getName() }}'s TodoList </h3>
+
+        <div class="input-group mb-3">
+            <input type="text" class="form-control">
+            <button class="btn btn-outline-primary">Add</button>
+        </div>
+
+        <div class="form-check mb-3">
+            <input type="checkbox" class="form-check-input" name="" id="displayAll">
+            <label for="displayAll" class="form-check-label" >Display All</label>
+        </div>
 
 
-<h1 class="text-danger">This Paragraph is from TodoApp</h1>
+
+
+      <table class="table table-bordered">
+        <thead>
+          <th></th>
+          <th>Description</th>
+          <th>Action</th>
+        </thead>
+        <tbody *ngFor="let item of items2; let i = index">
+          <tr>
+            <!-- <td>{{ item.id }} </td> -->
+                <!-- index kullanimi. Dikkat burada degerler 0 dan baslar.  -->
+            <td>{{ i + 1 }} </td>
+            <td>{{ item.description }} </td>
+            <td>{{ item.action }} </td>
+          </tr>
+        </tbody>
+
+            <!-- Su sekilde de calisir. -->
+
+        <!-- <tbody>
+          <tr *ngFor="let item of items2">
+            <td>{{ item.id }} </td>
+            <td>{{ item.description }} </td>
+            <td>{{ item.action }} </td>
+          </tr>
+        </tbody> -->
+      </table>
+
+      <hr>
+      <hr>
+            
+        <!-- for loop snippet;  angfor -->
+      <ul *ngFor="let item of items1" >
+        <li>{{item}}</li>
+      </ul>
+
+
+    </div>
+  </div>
+</div>
+
+
+<!-- Önemli: 
+    html dosyasinda tag icinde yazmis oldugumuz for loop lar inspect yaptigimizda görünmez. sadece hangi tag lari kullandiysak o veriler görünür.
+-->
 

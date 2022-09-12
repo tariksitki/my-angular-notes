@@ -21,7 +21,9 @@
     "lib": [
       "es2020",
       "dom"
-    ]
+    ],
+        // model de constructor tanimlamak istemiyorsak false kullaniriz. Ancak true yaparsak tanimlamak zorundayiz. 
+    "strictNullChecks": false
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
