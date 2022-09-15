@@ -280,18 +280,25 @@ ve module dosyasi icindeki baslangic component ini de degistirebiliriz.
 
 
 
+        ## ngModel:  (two way binding)
+
+component e bagladigimiz bir degeri sayfa üzerinden yani browser da degistirme imkanina sahip oluruz. mesela true false olarak degistirme
 
 
 
 
 
 
+        ### kosullu ifadeler:
+
+eger html de bir elementin gösterilmesini yada gösterilmemeisini istiyorsak, bu durumda if kosulu html tagi icine yazilir. örnegini yaptik. 
 
 
 
 
 
-
+        ## localstorage:
+localstorage in remove diye bir yöntemi var. veriyi siler. 
 
 
 

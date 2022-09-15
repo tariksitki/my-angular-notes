@@ -4,32 +4,251 @@
       <!-- <h3 class="bg-primary text-white p-3 text-center">{{ name }}'s TodoList </h3> -->
       <h3 class="bg-primary text-white p-3 text-center">{{ getName() }}'s TodoList </h3>
 
+        <!-- Biz normalde component lardan html dosyasina veri gönderirirz. Ancak input lardan gelen veriyi component e aktarmak icin tersine is akisi gerekir. Bunun icin input lara birinci olarak # ile name verebiliriz ve bu isim ile gönderebiliriz event icinde. -->
+
         <div class="input-group mb-3">
-            <input type="text" class="form-control">
-            <button class="btn btn-outline-primary">Add</button>
+          <!-- Önemli: eventler angular da html sayfasinda tanimlanir: inputa yazilan verilerin enter a basilarak gönderilmesi islemi input icinde gerceklesen bir olaydir. Bu nedenle button icinde degil input icinde tanimlanir.  
+          Eger sadece keyup dersek, bu durumda react daki onChange e karsilik gelir. sadece enter a basinca calismasi icin keyup.enter -->
+
+      
+            <!-- <input #txtItem type="text" class="form-control" (keyup) = "addItem(txtItem.value)" > -->
+
+                <!-- Bu normal hali. asagida ise inputa veri girildiginde, butonun disabled ini kaldirmak icin hareketli bir yapi kullanmamiz gerektiginden, farkli yapi kullaniyoruz.  -->
+            <!-- <input #txtItem type="text" class="form-control" (keyup.enter) = "addItem(txtItem.value); txtItem.value = ''"> -->
+
+
+                <!-- Burada # ile baslayan isme gerek yok. click event ine veri gönderimine gerek kalmiyor. Cünkü, ngModul ile toggle yapacagiz. Input icinde veri degistiginde de hareketli oldugunu görmek icin, inputun hemen üzerinde yazdiracagiz ekrana  -->
+                
+            <div>
+                  {{ inputText }}
+            </div> <br>
+
+            <input [(ngModel)]="inputText" type="text" class="form-control" (keyup.enter) = "addItem()">
+
+                  <!-- Blur event. input dan baska yere tiklayinca value gönderilir  -->
+            <!-- <input #txtItem type="text" class="form-control" (blur) = "addItem(txtItem.value); txtItem.value = ''" > -->
+
+            <!-- <button class="btn btn-outline-primary" (click) = "addItem(txtItem)" >Add</button> -->
+                <!-- Burada direkt inputun valuesunu gönderiyoruz. -->
+                <!-- Önemli: inputun value su alindiktan sonra inputun icini sifirlama react da oldugu gibi component de yapilmiyor. html de button tagi icinde yapilir. aralarda ; kullanilir dikkat-->
+            
+            
+                <!-- Eger input icerisinde herhangi bir veri yoksa buton disabled olsun istersek bunu [class.disabled]="txtItem.value.length == 0"   bu sekilde yapamayiz. Cünkü react daki state ler gibi burada da input icine veri girildiginde, bunun birseyleri harekete gecirmesi ve butonu disabled olmaktan kurtarmasi gerekir. Bu nedenle asagidaki gibi yapiyoruz ve component e gidip input un verisi ile ilgili kisim ekliyoruz. -->
+            
+                  <!-- Butonun eski hali. asagida yeni hali ngModel kullanimi icin  -->
+        <!-- <button 
+            class="btn btn-outline-primary" 
+            (click) = "addItem(txtItem.value); txtItem.value = '' ">Add</button>
+        </div> -->
+        
+
+            <!-- ngModel kullandigimiz icin artik, input verisini component e göndermeye gerek kalmadi. component de inputText olusturduk. Buradaki ngModel ile bagladik. Onlar two way binding ile hareketli hale geldiler. Butona tiklandiktan sonra input icini sifirlama islemi de component de yapiliyor.  -->
+        
+                <!-- Bu örmekte Butonun class ayarlari html de yapiliyor -->
+            <!-- <button 
+            [class]="{
+              'bg-primary' : inputText.length > 0, 
+              'btn-secondary' : inputText.length == 0,
+              'disabled' : inputText.length == 0
+            }"
+            class="btn" 
+            (click) = "addItem() ">Add
+          </button> -->
+
+
+              <!-- Butonun class ayarlari component da bir method vasitasi ile  yapiliyor. Burada sadece o methodu cagiriyoruz.-->
+
+          <button 
+            [class]="getButtonClasses()"
+            class="btn" 
+            (click) = "addItem() ">Add
+          </button>
+
+
+
+
+
         </div>
+
+
+
+
+
+        <!-- Event ile yaptigimiz bu islemi yani inputun icine girilen veriyi onChnage gibi aninda degistirme islemini, ngModel ile daha kolay yapabiliriz. Bunun icin component imize selam adinda bir degisken atiyoruz. ve bu selam degiskeninin icerigini buradan degistirecegiz.
+        Component da selam icin bir initial deger girdik. Bu deger sayfa ilk acildiginda, inputun valuesu olarak icinde yer alacaktir. biz buradan bir harf sildigimizde hemen selam degiskenin de de silinecektir. 
+        Bu yöntemde input icin # ile isim atamasina ve event e gerek kalmaz. ngModel, toggle mantiginda calisir.  -->
+
+            <input type="text" [(ngModel)]="selam" class="form-control" >
+
+            <h3> {{ selam }} </h3>  <br> <br>
+
+
+
+
+
+
+
+              <!-- Two way binding:  Biz inputtan veri alip component e aktarmistik, sonra component  de bu veriyi isleyip html e göndermis ve ekranda basmistik. Aslinda bu iki yönlü bir islem.  bunu ngBinding engine ile de yapabiliriz: Bunun icin gerekli islemler burada checkbox icinde yapacagiz: Sonra bu veriyi component e gönderecegiz. Orada her tiklamada true ve false olarak degisecek ve bu html dosyasinda ekranda yazdiracagiz. 
+              Önemli: ngModel kullanimi icin bu modülü app.module.ts de bunu import etmemiz gerekecek. 
+              -->
+
+              <!-- [(ngModel)]="displayAll" burada yazan displayAll, component deki displayAll degiskenine ait isimdir. yani o degisken ile cift yönlü binding yap diyoruz.  -->
 
         <div class="form-check mb-3">
-            <input type="checkbox" class="form-check-input" name="" id="displayAll">
+            <input type="checkbox" [(ngModel)]="displayAll" class="form-check-input" name="" id="displayAll">
             <label for="displayAll" class="form-check-label" >Display All</label>
+        </div>
+            <!-- cift yönlü binding i ekranda gösterme -->
+        <p> {{ displayAll }} </p>
+
+       
+
+
+
+              <!-- Tamamlanan görev sayisini gösteren Alert Div  -->
+    
+        <div class="alert alert-success">
+          {{ completedTodo() }} adet görev tamamlandi
         </div>
 
 
 
 
-      <table class="table table-bordered">
+          <!-- Kosullu ifadeler: Eger tabloda elementimiz yoksa sadece alert gösterilecek. varsa alert gösterilmeyecek. Bu durumu gerceklestirmek icin iki ihtimalimiz vardir. 
+          1: Klasik yöntem. yani table tag i icine *ngIf="getItem().length > 0"  ifadesi yazilir. alert div  icine de *ngIf="getItem().length == 0"  yazilir. 
+          2: Bu ise if ve else in birlikte kullanimidir. yani önce alert div i icinde if yazdik. else kullanabilmek icin table i template icine aldik. else kosulu icine template i verdik.  -->
+
+
+      <div class="alert alert-danger" *ngIf="getItem().length == 0; else tableTemplate">
+        There is no Element
+      </div>
+
+              <!-- Template  olusturmak icin bos bir yere ng template yazdik. Olusan taglar in icindeki fazla bilgileri sildik sadece taglar kaldi.  -->
+      <ng-template #tableTemplate >
+      <table class="table table-bordered" >
         <thead>
           <th></th>
           <th>Description</th>
           <th>Action</th>
         </thead>
-        <tbody *ngFor="let item of items2; let i = index">
+
+            <!-- Bu eski kullanim  -->
+        <!-- <tbody *ngFor="let item of items2; let i = index">
           <tr>
+             <td>{{ item.id }} </td> 
+               index kullanimi. Dikkat burada degerler 0 dan baslar.  
+            <td>{{ i + 1 }} </td>
+            <td>{{ item.description }} </td>
+            <td>{{ item.action }} </td>
+          </tr>
+        </tbody> -->
+
+
+
+            <!-- Model olusturduktan sonraki kullanim:
+              ancak bu method oldugu icin () kullanimina dikkat.
+            -->
+          <tbody *ngFor="let item of getItem(); let i = index">
+          
+
+
+                  <!-- Class Binding -->
+              <!-- Dynamic class kullanimi (Bu normal kullanim):  a-class dersek yapi cikar.  
+              item.action  bu ifade == true ise demektir. 
+              -->
+            <!-- <tr [class.bg-primary]="item.action" [class.bg-danger]="!item.action" >
+               -->
+
+                  <!-- Dynamic class Kullanimi kisa yol -->
+
+            <tr [class.bg-primary]="item.action" [class]="{ 'bg-primary' : item.action, 'bg-danger' : !item.action }" >
             <!-- <td>{{ item.id }} </td> -->
                 <!-- index kullanimi. Dikkat burada degerler 0 dan baslar.  -->
             <td>{{ i + 1 }} </td>
             <td>{{ item.description }} </td>
-            <td>{{ item.action }} </td>
+
+            <!-- Normal kullanim bu sekilde idi. Biz simdi bunu kosullu ifade yapalim: -->
+            <!-- <td>{{ item.action }} </td> -->
+
+                  <!-- if ile kullanim : -->
+            <!-- <td> 
+              <div *ngIf="item.action === true" >Kosullu Yes</div>
+              <div *ngIf="item.action === false" >Kosullu No</div>
+            </td> -->
+
+
+                  <!-- switch ile kullanim: Bu kullanimda; sadece bos bir yere ngswitch yazmamiz yeterli. Otomatik olarak div gelir. Buradaki case sayisi istedigimiz kadar artirilabilir. Eger case lere uymayan deger varsa da onunicin default kismi kullanilir.  -->
+            <!-- <div [ngSwitch]="item.action">  
+              <div *ngSwitchCase="true">Kosullu Switch Yes</div>
+              <div *ngSwitchDefault>Kosullu  No</div>
+            </div> -->
+
+
+
+
+
+
+              <!-- if else ile kullanim 
+              Burada item dememizin sebebi for loop icinde item dedik. -->
+
+              <td>
+                <div *ngIf="item.action; else noTemplate" >If else li Yes</div>
+
+                <ng-template #noTemplate>
+                  <div>If Else li No</div>
+                </ng-template>
+              </td>
+
+
+
+
+
+                  <!-- if then blogu. If sartina uyan kisim gösterilmez. Buradaki div sadece yer tutucu olarak kullanilir. if sartina uymazsa then blogu gösterilir -->
+          
+            <!-- <td>
+                <div *ngIf="item.action; then noTemplate" >Html de gösterilmez.</div>
+
+                <ng-template #noTemplate>
+                  <div>If Else li No</div>
+                </ng-template>
+            </td> -->
+
+
+
+
+
+                    <!-- if-then-else blogu. then kismi yine gösterilmez
+                      en sondaki kisim then blogu.  ortadaki kisim ise else blogu.
+                    -->
+
+              <!-- <td>
+                <div *ngIf="item.action; then yesTemplate else noTemplate">
+                  Burasi html de gösterilmez
+                </div>
+
+                <ng-template #noTemplate>
+                  <div>If Else Then No</div>
+                </ng-template>
+
+                <ng-template #yesTemplate>
+                  <div>If Else Then Yes</div>
+                </ng-template>
+              </td> -->
+
+
+              <!-- bu checkbox vasitasi ile action i true yada false yapariz. icine ne yazarsak onu toggle gibi bir düz bir ters cevirir. yani burada item.action yazmamiz yeterli. item i zaten for loop dan aliyoruz. item bize icinde description ve action olan object formatinda gelir. Buradan toggle ile direkt degistirebiliriz.  
+              
+              CHANGE: checkbox larin change diye bir özelligi vardir. kutucugun durumu dolu yada bos olarak degistiginde bir method calistirir. Bu methodu component da tanimlariz. Ne yapacagini kendimiz belirleriz. Burada calisacak methodu yazarken icine parametre koyaup gönderebiliriz. Böylece hangi item in checkbox ina tikladigimiz orada belli olur.  -->
+
+
+            <td>
+              <input 
+              type="checkbox" 
+              [(ngModel)]="item.action"
+              (change) = "ActionChangeMethod(item)"  
+              name="" 
+              id="">
+            </td>
           </tr>
         </tbody>
 
@@ -43,6 +262,7 @@
           </tr>
         </tbody> -->
       </table>
+      </ng-template>
 
       <hr>
       <hr>
@@ -51,6 +271,12 @@
       <ul *ngFor="let item of items1" >
         <li>{{item}}</li>
       </ul>
+
+      <br><br>
+      <hr>
+      <br>
+
+      <h3>{{ message }} </h3>
 
 
     </div>
