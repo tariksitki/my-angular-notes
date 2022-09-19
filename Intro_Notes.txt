@@ -104,16 +104,17 @@ Angular Project Kurulum:
 
 # proje dosyalarimizin hepsi src icinde yer alir. diger tüm dosyalar projenin ayarlari ile ilgili.
 
-## app icinde bulunan html css ve iki adet ts dosyalari, app component ini olusturur.
+## todo icinde bulunan html css ve iki adet ts dosyalari, app component ini olusturur. app ise modüldür. 
 ## index.html icindeki <app-root></app-root>  bizim app component imizdir. 
 bunun icerigi silinince hersey gider. 
 
 
 ## app klasörüne baktigimizda, 4 tane dosya ve birde modül görürüz. 
-Biz bir app gelistirirken tüm kodlarimizi index.htm icerisine yazmayiz. cünkü kodlarimizin baska yerlerde de kullanilmasini isteriz. Bunun icin kodlarimizi tek bir parca halinde tutmak yerine, kücük kücük parcalara yani component lara böleriz. yani navbar imizi footer imiz bir component dir. 
+Biz bir app gelistirirken tüm kodlarimizi index.htm icerisine yazmayiz. cünkü kodlarimizin baska yerlerde de kullanilmasini isteriz. Bunun icin kodlarimizi tek bir parca halinde tutmak yerine, kücük kücük parcalara yani component lara böleriz. yani navbar imiz footer imiz bir component dir. 
 
 ## modül ise; component lari kapsayan seydir. bir app icindeki tüm component larimizi kapsar. ayrica angular tarafindan bize default olarak saglanmis ve bizim component lerimiz ile birlikte kullanilacak diger modüllerden de faydalanmak icin ve bunlari en etkili sekilde kullanmak icin, bir app icindeki tüm component lerimiz  ve angular tarafindan saglanan default modüller bir modül icinde yer alir. 
-Bu kapsayici modül, bizim app imizi olusturur ve app isimle app imizde bu modulün adi AppModule dir.
+
+Bu kapsayici modül, bizim app imizi olusturur ve app isimli app imizde bu modulün adi AppModule dir.
 
 Tüm bilesenlerimiz appModlü olusturur. appModul de uygulamamizin kendisidir. 
 
@@ -138,7 +139,7 @@ buradaki kod bize appModule ile baslayacagini söyler.
 
 ## Özet:
 Bir proje icerisinde birden cok modüle olabilir. Bir modul icerisinde de birden cok component olabilir. 
-# Ancak; modüllerden bir tanesini projemizin baslangic modülü olarak secmek durumundayiz.
+# Ancak; modüllerden bir tanesini projemizin baslangic modülü olarak secmek durumundayiz. modül icinde de bir tane component i baslangic component i olarak secmeliyiz. 
 
 Bunu nasil yapariz: 
 main.ts icerisinde, modül ile ilgili bir böl+m vardir. Bu bölüme yazariz. 

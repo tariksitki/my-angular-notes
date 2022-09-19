@@ -50,7 +50,7 @@ export class AppComponent {
     action: true,
   };
 
-  // property farkli formatlarda olabilir:
+  // property farkli formatlarda olabilir: (liste)
   lands = ['Deutschland', 'England', 'USA'];
 }
 
