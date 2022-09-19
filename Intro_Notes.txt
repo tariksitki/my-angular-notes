@@ -302,7 +302,41 @@ localstorage in remove diye bir yöntemi var. veriyi siler.
 
 
 
+    ### Unit test: 
 
+1: Kodumuzun refaktoring edilmeden önceki halinde kusursuz calistigindan emin olmak icin 
+2: Kodumuzun yeni parcasinda bug var mi yok mu 
+3: Ülü yani kullanilmayan bir kod var mi 
+4: Kodumuzda single responsiblity gecerli mi. yani her bir kodumuz sadece bir sey den mi sorumlu. 
+Her bir kodumuzun tek bir amaci mi var. 
+5: Unit test yeni personel icin bir de documentation görevi görür. Yani proje basladiginda olmayan takima sonradan dahil olan birisi icin projeyi anlama imkani sunar. 
+
+
+## yazdigimiz kod unit testable olmali. Bunu olusturmadigimiz sürece test yazmakta zor olacaktir. 
+
+
+## Test yazarken 3 tane ortam olur. 
+1: Angular in kendisi 
+2: Karma:  yani test runner (test lerimizi burada run ederiz.)
+3: Jasmine : behaviral development framework 
+
+
+## Cli ile component olusturdugumuzda otomatik olarak test dosyasi da olusur. Bu nedenle biz ng test yazdigimizda hicbir sey yapmasak da test i runner eder. 
+
+## jasmine ait bir test arayüzü var. Burada hersey detayli gösterilir. 
+
+## Ana dizinde unit test ile ilgili bir foto var:
+eger test ile birlikte code coverage yapmak isterse, ng test --code-coverage  yazariz.
+yada kendisi otomatik olarak coverage da versin istersek, angular.json icine foto daki kodu yazariz. 
+
+karma.conf.json isimli dosyada ise, coverage larin oranlari yazilir. 
+global tüm testi ilgilendirir. each kismi ise bireysel alanlardir. 
+
+
+### Tipps and Tricks:
+
+## test den gecmemesi gereken seylerin gercekten gecmemesi gerekir. eger testimiz hr kosulda basarili oluyorsa bir sikinti vardir. 
+## Unit test yaziminda mocking ile ilerlemek cok önemli. Diger yöntem hatalari görünce ignore ediyor. 
 
 
 
